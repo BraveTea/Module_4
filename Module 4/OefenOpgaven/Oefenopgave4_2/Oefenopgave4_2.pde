@@ -7,6 +7,7 @@ void setup(){
 }
 
 void draw(){
+  smooth();
   welcome(width/4, height/4, "Harry");
   welcome(width/4, (height/4)*3, "Marianne");
   welcome((width/4)*3, height/4, "Ludo");
@@ -15,7 +16,6 @@ void draw(){
 }
 
 void welcome(int x, int y, String name){
-  smooth();
   stroke(255);
   textAlign(CENTER);
   text("Hallo " + name + " , hoe gaat het met je?", x, y);
