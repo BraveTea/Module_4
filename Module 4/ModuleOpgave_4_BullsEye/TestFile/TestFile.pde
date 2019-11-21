@@ -89,7 +89,7 @@ void drawPause() {
   text("PAUSE", width/2, height - 25);
 }
 
-// here make a boolean function (
+// here make a boolean function (called isMouseInButton() eg and have it return a boolean)
 void buttonMousePos() {
   if (mouseX >= width/2 - 50 && mouseX <= width/2 + 50) {
     if (mouseY >= height - 50) {
@@ -100,6 +100,8 @@ void buttonMousePos() {
     isMouseInButton = false;
   }
 }
+
+
 
 void drawBullsEye(int x) { //perhaps I can put this in a for loop where it decreases the size by 10 every time) But it also needs to change colour....
   fill(#FF0000);
