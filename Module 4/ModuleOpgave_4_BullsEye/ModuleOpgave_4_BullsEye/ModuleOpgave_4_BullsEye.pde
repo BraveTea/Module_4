@@ -10,9 +10,10 @@ int circleSize = 55;
 
 boolean isStart = false; 
 
-boolean isMouseInButton = false; //boolean isMouseInButton
+int testX = 1;
 
-int testX = 0;
+int hitsVar = 0;
+int missesVar = 0;
 
 void settings() {
   size(size, size); //by using settings you can appoint a variable to size
@@ -27,27 +28,42 @@ void draw() {
     straveBullsEye();
   }
   startPauseButton();
+  hitMissCounter();
 }
 
 void mouseClicked() {
-  if (isMouseOnBullsEye()){
-    print(testX);
-   print("TEST SUCCESS \n");
-   testX++;
-   
-   }
-  
-  if (isStart == false && isMouseInButton) {
+  if (!isMouseOnBullsEye()) {
+    misses();
+  } else {
+    hits();
+  }
+  if (isStart == false && isMouseOnButton()) {
     isStart = true;
   } else {
-    if (isMouseInButton) {
+    if (isMouseOnButton()) {
       isStart = false;
     }
   }
 }
 
+void hitMissCounter() {
+  textAlign(CORNER);
+  textSize(15);
+  fill(255);
+  text("Hits: " + hitsVar + " Misses: " + missesVar, 15, 25);
+}
 
+void hits() {
+  if (isStart) {
+    hitsVar++;
+  }
+}
 
+void misses() {
+  if (isStart) {
+    missesVar++;
+  }
+}
 
 void straveBullsEye() {
   if (posBullsEye == 0) {
@@ -69,7 +85,7 @@ void straveBullsEye() {
 void startPauseButton() {
   drawButton();
   startPause();
-  buttonMousePos();
+  isMouseOnButton();
 }
 
 void drawButton() {
@@ -101,15 +117,16 @@ void drawPause() {
   text("PAUSE", width/2, height - 25);
 }
 
-// here make a boolean function (
-void buttonMousePos() {
-  if (mouseX >= width/2 - 50 && mouseX <= width/2 + 50) {
-    if (mouseY >= height - 50) {
-      isMouseInButton = true;
-    }
-  } else {
-    isMouseInButton = false;
-  }
+boolean isMouseOnButton() {
+  return(isXonButton() && isYonButton());
+}
+
+boolean isXonButton() {
+  return(mouseX >= width/2 - 50 && mouseX <= width/2 + 50);
+}
+
+boolean isYonButton() {
+  return(mouseY >= height - 50);
 }
 
 void drawBullsEye(int x) { //perhaps I can put this in a for loop where it decreases the size by 10 every time) But it also needs to change colour....
@@ -123,32 +140,16 @@ void drawBullsEye(int x) { //perhaps I can put this in a for loop where it decre
   circle(x + circleSize/2, height/2, 25);
   fill(#FF0000);
   circle(x + circleSize/2, height/2, 15);
-  
-  
 }
 
 boolean isMouseOnBullsEye() {
   return (isXonBullseye() && isYonBullseye());
 }
 
-boolean isXonBullseye(){
+boolean isXonBullseye() {
   return (mouseX >= posBullsEye && mouseX <= posBullsEye + circleSize);
 }
 
-boolean isYonBullseye(){
+boolean isYonBullseye() {
   return (mouseY >= height/2 - circleSize/2 && mouseY <= height/2 + circleSize/2);
 }
-
-
-/* DEFUNCT FUNCTIONS
- 
- void moveBullsEye() {
- if (posBullsEye <= width - circleSize ) {
- drawBullsEye(posBullsEye);
- posBullsEye++;
- } else {
- posBullsEye = 0;
- }
- }
- 
- */
