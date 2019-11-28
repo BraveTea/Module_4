@@ -12,6 +12,7 @@ boolean isStart = false;
 
 boolean isMouseInButton = false; //boolean isMouseInButton
 
+int testX = 0;
 
 void settings() {
   size(size, size); //by using settings you can appoint a variable to size
@@ -29,12 +30,23 @@ void draw() {
 }
 
 void mouseClicked() {
-  if (isStart == false && isMouseInButton == true) {
+  if (isMouseOnBullsEye()){
+    print(testX);
+   print("TEST SUCCESS \n");
+   testX++;
+   
+   }
+  
+  if (isStart == false && isMouseInButton) {
     isStart = true;
   } else {
-    isStart = false;
+    if (isMouseInButton) {
+      isStart = false;
+    }
   }
 }
+
+
 
 
 void straveBullsEye() {
@@ -50,7 +62,7 @@ void straveBullsEye() {
   if (isMovingLeft == true) {
     posBullsEye--;
   }
- // posBullsEye = isMovingLeft ? posBullsEye++ : posBullsEye--;
+  // posBullsEye = isMovingLeft ? posBullsEye++ : posBullsEye--;
   drawBullsEye(posBullsEye);
 }
 
@@ -89,19 +101,16 @@ void drawPause() {
   text("PAUSE", width/2, height - 25);
 }
 
-// here make a boolean function (called isMouseInButton() eg and have it return a boolean)
+// here make a boolean function (
 void buttonMousePos() {
   if (mouseX >= width/2 - 50 && mouseX <= width/2 + 50) {
     if (mouseY >= height - 50) {
       isMouseInButton = true;
     }
-  }
-  else {
+  } else {
     isMouseInButton = false;
   }
 }
-
-
 
 void drawBullsEye(int x) { //perhaps I can put this in a for loop where it decreases the size by 10 every time) But it also needs to change colour....
   fill(#FF0000);
@@ -114,9 +123,21 @@ void drawBullsEye(int x) { //perhaps I can put this in a for loop where it decre
   circle(x + circleSize/2, height/2, 25);
   fill(#FF0000);
   circle(x + circleSize/2, height/2, 15);
+  
+  
 }
 
+boolean isMouseOnBullsEye() {
+  return (isXonBullseye() && isYonBullseye());
+}
 
+boolean isXonBullseye(){
+  return (mouseX >= posBullsEye && mouseX <= posBullsEye + circleSize);
+}
+
+boolean isYonBullseye(){
+  return (mouseY >= height/2 - circleSize/2 && mouseY <= height/2 + circleSize/2);
+}
 
 
 /* DEFUNCT FUNCTIONS
