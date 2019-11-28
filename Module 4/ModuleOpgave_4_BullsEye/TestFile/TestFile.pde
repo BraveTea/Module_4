@@ -32,16 +32,14 @@ void draw() {
 }
 
 void mouseClicked() {
-  if (!isMouseOnBullsEye()) {
-    misses();
+
+  if (isMouseOnButton()) {
+    isStart = !isStart;
   } else {
-    hits();
-  }
-  if (isStart == false && isMouseOnButton()) {
-    isStart = true;
-  } else {
-    if (isMouseOnButton()) {
-      isStart = false;
+    if (isMouseOnBullsEye()) {
+      hits();
+    } else {
+      misses();
     }
   }
 }
@@ -133,13 +131,13 @@ void drawBullsEye(int x) { //perhaps I can put this in a for loop where it decre
   fill(#FF0000);
   circle(x + circleSize/2, height/2, circleSize); 
   fill(255);
-  circle(x + circleSize/2, height/2, 45);
+  circle(x + circleSize/2, height/2, circleSize-10);
   fill(#FF0000);
-  circle(x + circleSize/2, height/2, 35);
+  circle(x + circleSize/2, height/2,  circleSize-20);
   fill(255);
-  circle(x + circleSize/2, height/2, 25);
+  circle(x + circleSize/2, height/2,  circleSize-30);
   fill(#FF0000);
-  circle(x + circleSize/2, height/2, 15);
+  circle(x + circleSize/2, height/2,  circleSize-40);
 }
 
 boolean isMouseOnBullsEye() {
@@ -153,28 +151,3 @@ boolean isXonBullseye() {
 boolean isYonBullseye() {
   return (mouseY >= height/2 - circleSize/2 && mouseY <= height/2 + circleSize/2);
 }
-
-
-/* DEFUNCT FUNCTIONS
- 
- void moveBullsEye() {
- if (posBullsEye <= width - circleSize ) {
- drawBullsEye(posBullsEye);
- posBullsEye++;
- } else {
- posBullsEye = 0;
- }
- }
- 
- 
- void buttonMousePos() {
- if (mouseX >= width/2 - 50 && mouseX <= width/2 + 50) {
- if (mouseY >= height - 50) {
- isMouseInButton = true;
- }
- } else {
- isMouseInButton = false;
- }
- }
- 
- */
